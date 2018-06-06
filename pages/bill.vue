@@ -13,11 +13,11 @@
         <a href="https://medium.com/@billhorsman"><i class="fab fa-fw fa-medium"/></a>
         <a href="https://keybase.io/billhorsman"><i class="fab fa-fw fa-keybase"/></a>
       </p>
-      <p>I'm a computer programmer for Logical Cobwebs with over 25 years experience in software development. I've been building web applications since 1997 - first in Java and then, since the start of 2007, in <a href="https://rubyonrails.org/">Ruby on Rails</a>.</p>
+      <p>I'm a computer programmer for Logical Cobwebs with over 25 years experience in software development. I've been building web applications since 1997 - first in Java and then, since the start of 2007, in <span class="nowrap"><a href="https://rubyonrails.org/">Ruby on Rails</a>.</span></p>
 
       <p>I like to build beautiful interfaces that do useful jobs so that people can get things done quickly, easily and with fewer mistakes.</p>
 
-      <p>I have used Ruby on Rails every day of my working life for the past ten years. Lately, I've been making more and more use of <a href="https://vuejs.org/">Vue</a>.</p>
+      <p>I have used Ruby on Rails every day of my working life for the past ten years. Lately, I've been making more and more use of <span class="nowrap"><a href="https://vuejs.org/">Vue</a>.</span></p>
 
       <ul>
         <li><span>25 years worth of mistakes; doing things the hard way; learning from what went wrong. Trying to learn even more from what went right.</span></li>
