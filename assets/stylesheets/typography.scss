@@ -1,0 +1,11 @@
+a {
+  border-bottom: 1px solid #777;
+  color: white;
+  display: inline-block;
+  margin-bottom: -1px;
+  text-decoration: none;
+  transition: all .3s;
+  &:hover {
+    border-color: white;
+  }
+}
