@@ -56,5 +56,9 @@ img {
   border-radius: 50%;
   height: 160px;
   width: 160px;
+  @media (max-width: 480px) {
+    height: 120px;
+    width: 120px;
+  }
 }
 </style>
