@@ -6,7 +6,7 @@
         <span class="hours">{{total}}</span>
         <abbr>hours</abbr>
       </div>
-      <ul>
+      <ul :class="listClass">
         <li v-for="row in rows" :key="row.index">
           <span class="date"><span>{{row.date.toDateString()}}</span></span>
           <span class="calc">
@@ -21,6 +21,7 @@
           </div>
         </li>
       </ul>
+      <a href="#" v-on:click.prevent="loadMore" :class="linkClass">See earlier entries</a>
     </section>
   </article>
 </template>
@@ -33,24 +34,46 @@ export default {
     return {
       code: null,
       rows: [],
-      total: null,
-      state: 'empty'
+      total: 0,
+      state: 'empty',
+      showAll: false,
+      loading: true
     }
   },
   computed: {
     jarState: function () {
-      return `jar jar-${this.state}`;
+      if (this.loading) {
+        return "jar jar-loading";
+      } else {
+        return `jar jar-${this.state}`;
+      }
+    },
+    listClass: function() {
+      if (this.showAll) {
+        return "show-all";
+      } else {
+        return "show-some";
+      }
+    },
+    linkClass: function() {
+      if (this.showAll || this.loading) {
+        return "hidden";
+      } else {
+        return "";
+      }
     }
   },
-  fetch ({ store, params}) {
-    console.log(store);
-    console.log(params);
-    this.code = params.code;
+  methods: {
+    loadMore: function () {
+      console.log("Boom");
+      this.showAll = true;
+    }
   },
   async mounted() {
     const urlParams = new URLSearchParams(window.location.search);
     this.code = urlParams.get('code');
-    const url = `https://cors-anywhere.herokuapp.com/https://docs.google.com/spreadsheets/d/e/${this.code}/pub?output=csv`;
+    const googleUrl = `https://docs.google.com/spreadsheets/d/e/${this.code}/pub?output=csv`;
+    const url = `https://cors-anywhere.herokuapp.com/${googleUrl}`;
     const response = await axios.get(url);
     const data = []
     let total = 0;
@@ -82,6 +105,7 @@ export default {
     } else {
       this.state = "debt";
     }
+    this.loading = false;
   },
   head: {
     title: "Hour Jar"
@@ -123,6 +147,16 @@ h1 {
     span {
       color: green;
     }
+  }
+  &.jar-loading {
+    span, abbr {
+      visibility: hidden;
+    }
+  }
+}
+ul.show-some {
+  > :nth-child(n+6) {
+    display: none;
   }
 }
 ul {
@@ -167,6 +201,7 @@ ul {
         border-radius: 11px;
         display: inline-block;
         font-size: 90%;
+        margin-right: .5rem;
         padding: 0 11px 2px;
         &.nrh {
           background: #E06437;
@@ -187,5 +222,8 @@ ul {
       }
     }
   }
+}
+.hidden {
+  display: none;
 }
 </style>
