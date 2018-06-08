@@ -108,11 +108,11 @@ h1 {
   border-color: #777;
   border-radius: 0 0 10px 10px;
   margin: 0 auto 5rem;
-  padding: 0 0 1rem;
+  padding: 3rem 0 1rem;
   width: 140px;
   span {
     display: block;
-    font-size: 5rem;
+    font-size: 2rem;
   }
   &.jar-debt {
     span {
