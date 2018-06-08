@@ -115,7 +115,7 @@ export default {
 
 <style lang="scss">
 article {
-  align-items: center;
+  align-items: start;
   display: flex;
   justify-content: center;
   min-height: 100vh;
