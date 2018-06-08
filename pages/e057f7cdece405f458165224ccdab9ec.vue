@@ -6,19 +6,21 @@
         <span class="hours">{{total}}</span>
         <abbr>hours</abbr>
       </div>
-      <table>
-        <tr v-for="row in rows" :key="row.index">
-          <td class="date"><span>{{row.date.toDateString()}}</span></td>
-          <td class="credit hours"><span v-if="row.credit > 0">{{row.credit}}</span></td>
-          <td class="debit hours"><span v-if="row.debit > 0">{{row.debit}}</span></td>
-          <td class="total hours"><span>{{row.total}}</span></td>
-          <td class="tags">
+      <ul>
+        <li v-for="row in rows" :key="row.index">
+          <span class="date"><span>{{row.date.toDateString()}}</span></span>
+          <span class="calc">
+            <span v-if="row.credit > 0" class="credit hours">{{row.credit.toFixed(1)}}</span>
+            <span v-if="row.debit > 0" class="debit hours">{{row.debit.toFixed(1)}}</span>
+            <span class="total hours">{{row.total.toFixed(1)}}</span>
+          </span>
+          <div class="tags">
             <span v-for="tag in row.tags" :key="tag">
               <span :class="tag" v-if="tag != ''">{{tag}}</span>
             </span>
-          </td>
-        </tr>
-      </table>
+          </div>
+        </li>
+      </ul>
     </section>
   </article>
 </template>
@@ -115,23 +117,43 @@ h1 {
     }
   }
 }
-table {
-  border-collapse: collapse;
-  td {
-    border: 1px solid #444;
-    padding: 1rem;
-    text-align: right;
-    &.hours {
-      width: 5rem;
+ul {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 1rem 0;
+    text-align: left;
+    width: 300px;
+    .calc {
+      display: block;
+      float: right;
     }
-    &.credit {
-      span:before {
+    .hours {
+      color: #777;
+      display: inline-block;
+      font-size: 120%;
+      padding-left: .5rem;
+    }
+    .credit {
+      &:before {
         content: "+";
       }
     }
-    &.tags {
-      border: 0;
-      text-align: left;
+    .debit {
+      &:before {
+        content: "-";
+      }
+    }
+    .total {
+      color: white;
+      &:before {
+        content: "=";
+      }
+    }
+    .tags {
+      padding-top: .5rem;
       span span {
         background: #444;
         border-radius: 11px;
