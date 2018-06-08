@@ -31,6 +31,7 @@ import axios from "axios"
 export default {
   data() {
     return {
+      code: null,
       rows: [],
       total: null,
       state: 'empty'
@@ -41,8 +42,15 @@ export default {
       return `jar jar-${this.state}`;
     }
   },
+  fetch ({ store, params}) {
+    console.log(store);
+    console.log(params);
+    this.code = params.code;
+  },
   async mounted() {
-    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR74PfiCKN05Nfv8WHDEp3gHBRb2O0IdmdwHMK52taSQhLNvEXd3db2nF-Mh60iFeu-Av2v2o3PYWPu/pub?output=csv";
+    const urlParams = new URLSearchParams(window.location.search);
+    this.code = urlParams.get('code');
+    const url = `https://docs.google.com/spreadsheets/d/e/${this.code}/pub?output=csv`;
     const response = await axios.get(url);
     const data = []
     let total = 0;
