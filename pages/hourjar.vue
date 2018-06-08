@@ -50,7 +50,7 @@ export default {
   async mounted() {
     const urlParams = new URLSearchParams(window.location.search);
     this.code = urlParams.get('code');
-    const url = `https://docs.google.com/spreadsheets/d/e/${this.code}/pub?output=csv`;
+    const url = `https://crossorigin.me/https://docs.google.com/spreadsheets/d/e/${this.code}/pub?output=csv`;
     const response = await axios.get(url);
     const data = []
     let total = 0;
