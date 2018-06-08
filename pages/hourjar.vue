@@ -174,11 +174,14 @@ ul {
     }
     .hours {
       color: #777;
-      display: inline-block;
+      display: block;
+      font-family: "Ubuntu Mono", Arial, sans-serif;
       font-size: 120%;
-      padding-left: .5rem;
+      padding-bottom: 3px;
+      text-align: right;
     }
     .credit {
+      color: green;
       &:before {
         content: "+";
       }
@@ -192,6 +195,7 @@ ul {
       color: white;
       &:before {
         content: "=";
+        color: #777;
       }
     }
     .tags {
