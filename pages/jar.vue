@@ -1,10 +1,9 @@
 <template>
   <article>
     <section>
-      <h1>Hour Jar</h1>
+      <h1>Jar</h1>
       <div :class="jarState">
         <span class="hours">{{total}}</span>
-        <abbr>hours</abbr>
       </div>
       <ul :class="listClass">
         <template v-for="row in rows">
@@ -20,7 +19,10 @@
         </template>
       </ul>
       <a href="#" v-on:click.prevent="loadMore" :class="linkClass">See earlier entries</a>
-      <p class="last-updated">Last updated at {{formattedLastUpdate}}</p>
+      <p class="last-updated">
+        <i class="fa fa-spinner fa-spin" v-show="updating"></i>
+        Data fetched at {{formattedLastUpdate}}
+      </p>
     </section>
   </article>
 </template>
@@ -36,13 +38,15 @@ Vue.component('hour-jar-row', HourJarRow)
 export default {
   data() {
     return {
+      code: null,
       rows: [],
       total: this.$store.state.total,
       stateOfJar: 'empty',
       showAll: false,
       loading: true,
       lastUpdate: null,
-      formattedLastUpdate: '-'
+      formattedLastUpdate: '-',
+      updating: false
     }
   },
   watch: {
@@ -75,15 +79,13 @@ export default {
   },
   methods: {
     loadMore: function () {
-      console.log("Boom");
       this.showAll = true;
     },
     fetchData: async function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      if (code) {
-        const googleUrl = `https://docs.google.com/spreadsheets/d/e/${code}/pub?output=csv`;
-        const url = `https://cors-anywhere.herokuapp.com/${googleUrl}`;
+      if (this.code) {
+        this.updating = true
+        const tinyUrl = `https://tinyurl.com/${this.code}`;
+        const url = `https://cors-anywhere.herokuapp.com/${tinyUrl}`;
         const response = await axios.get(url);
         const data = []
         let total = 0;
@@ -92,8 +94,13 @@ export default {
           const date = new Date(cols[0]);
           const credit = parseFloat(cols[1]) || 0;
           const debit = parseFloat(cols[2]) || 0;
-          const tags = cols[3].trim().split(",");
-          if (credit > 0) {
+          const tags = []
+          for (let t of cols[3].trim().split(",")) {
+            if (t != '') {
+              tags.push(t)
+            }
+          }
+          if (credit > 0 & tags.length == 0) {
             tags.push("topup");
           }
           total = total + credit - debit;
@@ -117,21 +124,32 @@ export default {
           this.stateOfJar = "debt";
         }
         this.lastUpdate = moment().format();
-        this.$store.commit('update', [rows, total, this.stateOfJar, this.lastUpdate]);
+        this.$store.commit('update', [this.code, {
+          total: this.total,
+          rows: this.rows,
+          stateOfJar: this.stateOfJar,
+          loading: false,
+          lastUpdate: this.lastUpdate
+        }]);
         this.loading = false;
+        this.updating = false
       }
     }
   },
   async mounted() {
-    this.total = this.$store.state.total
-    this.rows = this.$store.state.rows
-    this.stateOfJar = this.$store.state.stateOfJar
-    this.loading = this.$store.state.loading
-    this.lastUpdate = this.$store.state.lastUpdate
-    setTimeout(this.fetchData, 2000)
+    this.code = (new URLSearchParams(window.location.search)).get('code')
+    const jar = this.$store.state.jars[this.code]
+    if (jar) {
+      this.total = jar.total
+      this.rows = jar.rows
+      this.stateOfJar = jar.stateOfJar
+      this.loading = jar.loading
+      this.lastUpdate = jar.lastUpdate
+    }
+    this.fetchData()
   },
   head: {
-    title: "Hour Jar"
+    title: "Jar"
   }
 }
 </script>
