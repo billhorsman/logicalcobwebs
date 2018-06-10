@@ -172,5 +172,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~/assets/stylesheets/hourjar.scss';
+@import '~/assets/stylesheets/jar.scss';
 </style>
