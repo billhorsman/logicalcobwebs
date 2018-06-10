@@ -4,6 +4,23 @@
       <h1>Jar</h1>
       <div :class="jarState">
         <span class="hours">{{total}}</span>
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        viewBox="0 0 500 600" style="enable-background:new 0 0 500 600;" xml:space="preserve">
+        <path class="st0" d="
+        M 100 0
+        v 40
+        c 0 20, -20 30, -40 40
+        c -20 10, -50 30, -50 60
+        v 380
+        c 0 30, 40 70, 70 70
+        h 340
+        c 30 0, 70 -40, 70 -70
+        v -380
+        c 0 -40, -30 -50, -50 -60
+        c -20 -10, -40 -20, -40 -40
+        v -40
+        "/>
+      </svg>
       </div>
       <ul :class="listClass">
         <template v-for="row in rows">
@@ -155,5 +172,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~/assets/stylesheets/hourjar.scss'
+@import '~/assets/stylesheets/hourjar.scss';
 </style>
