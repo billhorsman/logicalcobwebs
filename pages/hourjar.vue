@@ -8,7 +8,7 @@
       </div>
       <ul :class="listClass">
         <li v-for="row in rows" :key="row.index">
-          <span class="date"><span>{{row.date.toDateString()}}</span></span>
+          <span class="date"><span>{{row.date}}</span></span>
           <span class="calc">
             <span v-if="row.credit > 0" class="credit hours">{{row.credit.toFixed(1)}}</span>
             <span v-if="row.debit > 0" class="debit hours">{{row.debit.toFixed(1)}}</span>
@@ -22,22 +22,30 @@
         </li>
       </ul>
       <a href="#" v-on:click.prevent="loadMore" :class="linkClass">See earlier entries</a>
+      <p class="last-updated">Last updated at {{formattedLastUpdate}}</p>
     </section>
   </article>
 </template>
 
 <script>
 import axios from "axios"
+import moment from "moment"
 
 export default {
   data() {
     return {
-      code: null,
       rows: [],
-      total: 0,
-      state: 'empty',
+      total: this.$store.state.total,
+      stateOfJar: 'empty',
       showAll: false,
-      loading: true
+      loading: true,
+      lastUpdate: null,
+      formattedLastUpdate: '-'
+    }
+  },
+  watch: {
+    lastUpdate: function (val) {
+      this.formattedLastUpdate = moment(val).format("H:mm:ss")
     }
   },
   computed: {
@@ -45,7 +53,7 @@ export default {
       if (this.loading) {
         return "jar jar-loading";
       } else {
-        return `jar jar-${this.state}`;
+        return `jar jar-${this.stateOfJar}`;
       }
     },
     listClass: function() {
@@ -56,7 +64,7 @@ export default {
       }
     },
     linkClass: function() {
-      if (this.showAll || this.loading) {
+      if (this.showAll || this.rows.length == 0) {
         return "hidden";
       } else {
         return "";
@@ -67,45 +75,60 @@ export default {
     loadMore: function () {
       console.log("Boom");
       this.showAll = true;
+    },
+    fetchData: async function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const googleUrl = `https://docs.google.com/spreadsheets/d/e/${code}/pub?output=csv`;
+      const url = `https://cors-anywhere.herokuapp.com/${googleUrl}`;
+      try {
+        const response = await axios.get(url);
+        const data = []
+        let total = 0;
+        for (let row of response.data.split('\n')) {
+          const cols = row.split(',');
+          const date = new Date(cols[0]);
+          const credit = parseFloat(cols[1]) || 0;
+          const debit = parseFloat(cols[2]) || 0;
+          const tags = cols[3].trim().split(",");
+          if (credit > 0) {
+            tags.push("topup");
+          }
+          total = total + credit - debit;
+          data.push({
+            index: data.length + 1,
+            date: date.toDateString(),
+            credit: credit,
+            debit: debit,
+            total: total,
+            tags: tags
+          });
+        }
+        const rows = data.reverse();
+        this.rows = rows;
+        this.total = total;
+        if (total > 0) {
+          this.stateOfJar = "some";
+        } else if (total == 0) {
+          this.stateOfJar = "empty";
+        } else {
+          this.stateOfJar = "debt";
+        }
+        this.lastUpdate = moment().format();
+        this.$store.commit('update', [rows, total, this.stateOfJar, this.lastUpdate]);
+        this.loading = false;
+      } catch(error) {
+        console.error(error)
+      }
     }
   },
   async mounted() {
-    const urlParams = new URLSearchParams(window.location.search);
-    this.code = urlParams.get('code');
-    const googleUrl = `https://docs.google.com/spreadsheets/d/e/${this.code}/pub?output=csv`;
-    const url = `https://cors-anywhere.herokuapp.com/${googleUrl}`;
-    const response = await axios.get(url);
-    const data = []
-    let total = 0;
-    for (let row of response.data.split('\n')) {
-      const cols = row.split(',');
-      const date = new Date(cols[0]);
-      const credit = parseFloat(cols[1]) || 0;
-      const debit = parseFloat(cols[2]) || 0;
-      const tags = cols[3].trim().split(",");
-      if (credit > 0) {
-        tags.push("topup");
-      }
-      total = total + credit - debit;
-      data.push({
-        index: data.length + 1,
-        date: date,
-        credit: credit,
-        debit: debit,
-        total: total,
-        tags: tags
-      });
-    }
-    this.rows = data.reverse();
-    this.total = total;
-    if (total > 0) {
-      this.state = "some";
-    } else if (total == 0) {
-      this.state = "empty";
-    } else {
-      this.state = "debt";
-    }
-    this.loading = false;
+    this.total = this.$store.state.total
+    this.rows = this.$store.state.rows
+    this.stateOfJar = this.$store.state.stateOfJar
+    this.loading = this.$store.state.loading
+    this.lastUpdate = this.$store.state.lastUpdate
+    setTimeout(this.fetchData, 2000)
   },
   head: {
     title: "Hour Jar"
@@ -114,120 +137,5 @@ export default {
 </script>
 
 <style lang="scss">
-article {
-  align-items: start;
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 1rem;
-  text-align: center;
-}
-h1 {
-  font-size: 3rem;
-  margin: 0 0 2rem;
-}
-.jar {
-  border-width: 0 3px 3px 3px;
-  border-style: solid;
-  border-color: #777;
-  border-radius: 0 0 10px 10px;
-  margin: 0 auto 5rem;
-  padding: 3rem 0 1rem;
-  width: 140px;
-  span {
-    display: block;
-    font-size: 2rem;
-  }
-  &.jar-debt {
-    span {
-      color: red;
-    }
-  }
-  &.jar-some {
-    span {
-      color: green;
-    }
-  }
-  &.jar-loading {
-    span, abbr {
-      visibility: hidden;
-    }
-  }
-}
-ul.show-some {
-  > :nth-child(n+6) {
-    display: none;
-  }
-}
-ul {
-  margin: 0;
-  padding: 0;
-  li {
-    list-style: none;
-    margin: 0;
-    padding: 1rem 0;
-    text-align: left;
-    width: 300px;
-    .calc {
-      display: block;
-      float: right;
-    }
-    .hours {
-      color: #777;
-      display: block;
-      font-family: "Ubuntu Mono", Arial, sans-serif;
-      font-size: 120%;
-      padding-bottom: 3px;
-      text-align: right;
-    }
-    .credit {
-      color: green;
-      &:before {
-        content: "+";
-      }
-    }
-    .debit {
-      &:before {
-        content: "-";
-      }
-    }
-    .total {
-      color: white;
-      &:before {
-        content: "=";
-        color: #777;
-      }
-    }
-    .tags {
-      padding-top: .5rem;
-      span span {
-        background: #444;
-        border-radius: 11px;
-        display: inline-block;
-        font-size: 90%;
-        margin-right: .5rem;
-        padding: 0 11px 2px;
-        &.nrh {
-          background: #E06437;
-          color: white;
-        }
-        &.ess {
-          background: #AF383A;
-          color: white;
-        }
-        &.gck {
-          background: #BA3EA9;
-          color: white;
-        }
-        &.topup {
-          background: green;
-          color: white;
-        }
-      }
-    }
-  }
-}
-.hidden {
-  display: none;
-}
+@import '~/assets/stylesheets/hourjar.scss'
 </style>

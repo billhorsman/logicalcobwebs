@@ -1,0 +1,123 @@
+article {
+  align-items: start;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+  text-align: center;
+}
+h1 {
+  font-size: 3rem;
+  margin: 0 0 2rem;
+}
+.jar {
+  border-width: 0 3px 3px 3px;
+  border-style: solid;
+  border-color: #777;
+  border-radius: 0 0 10px 10px;
+  margin: 0 auto 5rem;
+  padding: 3rem 0 1rem;
+  width: 140px;
+  span {
+    display: block;
+    font-size: 2rem;
+  }
+  &.jar-debt {
+    span {
+      color: red;
+    }
+  }
+  &.jar-some {
+    span {
+      color: green;
+    }
+  }
+  &.jar-loading {
+    span, abbr {
+      opacity: .1;
+    }
+  }
+}
+ul.show-some {
+  > :nth-child(n+6) {
+    display: none;
+  }
+}
+ul {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 1rem 0;
+    text-align: left;
+    width: 300px;
+    .calc {
+      display: block;
+      float: right;
+    }
+    .hours {
+      color: #777;
+      display: block;
+      font-family: "Ubuntu Mono", Arial, sans-serif;
+      font-size: 120%;
+      padding-bottom: 3px;
+      text-align: right;
+    }
+    .credit {
+      color: green;
+      &:before {
+        content: "+";
+      }
+    }
+    .debit {
+      &:before {
+        content: "-";
+      }
+    }
+    .total {
+      color: white;
+      &:before {
+        content: "=";
+        color: #777;
+      }
+    }
+    .tags {
+      padding-top: .5rem;
+      span span {
+        background: #444;
+        border-radius: 11px;
+        display: inline-block;
+        font-size: 90%;
+        margin-right: .5rem;
+        padding: 0 11px 2px;
+        &.nrh {
+          background: #E06437;
+          color: white;
+        }
+        &.ess {
+          background: #AF383A;
+          color: white;
+        }
+        &.gck {
+          background: #BA3EA9;
+          color: white;
+        }
+        &.topup {
+          background: green;
+          color: white;
+        }
+      }
+    }
+  }
+}
+.last-updated {
+  color: #777;
+  font-size: 80%;
+  margin: 2rem 0;
+  text-align: right;
+  width: 100%;
+}
+.hidden {
+  display: none;
+}

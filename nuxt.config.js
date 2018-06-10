@@ -25,9 +25,13 @@ module.exports = {
     '@/assets/stylesheets/typography.scss'
   ],
   plugins: [
-    '~/plugins/global.js'
+    '~/plugins/global.js',
+    { src: '~/plugins/localStorage.js', ssr: false }
   ],
   build: {
+    vendor: [
+      'moment'
+    ],
     /*
     ** Run ESLint on save
     */
