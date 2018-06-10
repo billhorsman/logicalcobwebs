@@ -1,23 +1,37 @@
 <template>
   <article>
     <section>
-      <h1>Jar</h1>
+      <h1>jar</h1>
       <div :class="jarState">
         <span class="hours">{{total}}</span>
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         viewBox="0 0 500 600" style="enable-background:new 0 0 500 600;" xml:space="preserve">
-        <path class="st0" d="
-        M 100 0
+        <path class="lid" d="
+        M 70 75
+        v -20
+        c 0 -20, 0 -40, 40 -40
+        h 20
+        m 220 0
+        h 40
+        c 20 0, 40 20, 40 40
+        v 20
+        "/>"
+        <path class="black" d="
+        M 335 31
+        h 50
+        "/>"
+        <path class="jar" d="
+        M 100 40
         v 40
         c 0 20, -20 30, -40 40
         c -20 10, -50 30, -50 100
-        c 10 100, 10 240, 0 340
+        c 10 100, 10 240, 0 300
         c 0 30, 40 70, 70 70
         c 30 0, 0 0, 30, -4
         c 50 -16, 230 -16, 280 0
         c 30 4, 0 4, 30 4
         c 30 0, 70 -40, 70 -70
-        c -10 -100, -10 -240, 0 -340
+        c -10 -100, -10 -240, 0 -300
         c 0 -70, -30 -90, -50 -100
         c -20 -10, -40 -20, -40 -40
         v -40

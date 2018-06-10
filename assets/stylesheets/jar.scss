@@ -7,8 +7,10 @@ article {
   text-align: center;
 }
 h1 {
-  font-size: 3rem;
-  margin: 0 0 -30px;
+  color: orange;
+  font-family: "Ubuntu Mono", Arial, sans-serif;
+  font-size: 2.5rem;
+  margin: 0 0 -32px;
 }
 .jar {
   height: 168px;
@@ -44,7 +46,17 @@ h1 {
     margin: auto;
     position: absolute;
     top: 0;
-    path {
+    .lid {
+      fill: transparent;
+      stroke: orange;
+      stroke-width: 16;
+    }
+    .black {
+      fill: transparent;
+      stroke: black;
+      stroke-width: 16;
+    }
+    .jar {
       fill: transparent;
       stroke: #fff;
       stroke-width: 20;
@@ -135,4 +147,8 @@ ul {
 }
 .hidden {
   display: none;
+}
+
+a {
+  color: orange;
 }
