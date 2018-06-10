@@ -7,19 +7,17 @@
         <abbr>hours</abbr>
       </div>
       <ul :class="listClass">
-        <li v-for="row in rows" :key="row.index">
-          <span class="date"><span>{{row.date}}</span></span>
-          <span class="calc">
-            <span v-if="row.credit > 0" class="credit hours">{{row.credit.toFixed(1)}}</span>
-            <span v-if="row.debit > 0" class="debit hours">{{row.debit.toFixed(1)}}</span>
-            <span class="total hours">{{row.total.toFixed(1)}}</span>
-          </span>
-          <div class="tags">
-            <span v-for="tag in row.tags" :key="tag">
-              <span :class="tag" v-if="tag != ''">{{tag}}</span>
-            </span>
-          </div>
-        </li>
+        <template v-for="row in rows">
+          <hour-jar-row
+            :date="row.date"
+            :credit="row.credit"
+            :debit="row.debit"
+            :total="row.total"
+            :tags="row.tags"
+            :key="row.index"
+            >
+          </hour-jar-row>
+        </template>
       </ul>
       <a href="#" v-on:click.prevent="loadMore" :class="linkClass">See earlier entries</a>
       <p class="last-updated">Last updated at {{formattedLastUpdate}}</p>
@@ -28,8 +26,12 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from "axios"
 import moment from "moment"
+
+import HourJarRow from '~/components/HourJarRow.vue'
+Vue.component('hour-jar-row', HourJarRow)
 
 export default {
   data() {
@@ -79,9 +81,9 @@ export default {
     fetchData: async function() {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
-      const googleUrl = `https://docs.google.com/spreadsheets/d/e/${code}/pub?output=csv`;
-      const url = `https://cors-anywhere.herokuapp.com/${googleUrl}`;
-      try {
+      if (code) {
+        const googleUrl = `https://docs.google.com/spreadsheets/d/e/${code}/pub?output=csv`;
+        const url = `https://cors-anywhere.herokuapp.com/${googleUrl}`;
         const response = await axios.get(url);
         const data = []
         let total = 0;
@@ -117,8 +119,6 @@ export default {
         this.lastUpdate = moment().format();
         this.$store.commit('update', [rows, total, this.stateOfJar, this.lastUpdate]);
         this.loading = false;
-      } catch(error) {
-        console.error(error)
       }
     }
   },
