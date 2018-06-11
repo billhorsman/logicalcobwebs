@@ -21,7 +21,7 @@ h1 {
   span {
     display: block;
     font-family: "Ubuntu Mono", Arial, sans-serif;
-    font-size: 2.5rem;
+    font-size: 2rem;
     position: absolute;
     top: 80px;
     width: 100%;
@@ -47,6 +47,11 @@ h1 {
     margin: auto;
     position: absolute;
     top: 0;
+    &.preanimate {
+      circle {
+        transform: translateX(70px);
+      }
+    }
     .lid {
       fill: transparent;
       stroke: orange;
@@ -54,6 +59,7 @@ h1 {
     }
     circle {
       fill: orange;
+      transition: all 5s;
     }
     .black {
       fill: transparent;
