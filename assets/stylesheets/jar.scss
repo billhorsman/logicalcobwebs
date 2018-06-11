@@ -11,6 +11,7 @@ h1 {
   font-family: "Ubuntu Mono", Arial, sans-serif;
   font-size: 2.5rem;
   margin: 0 0 -32px;
+  visibility: hidden;
 }
 .jar {
   height: 168px;
@@ -50,6 +51,9 @@ h1 {
       fill: transparent;
       stroke: orange;
       stroke-width: 16;
+    }
+    circle {
+      fill: orange;
     }
     .black {
       fill: transparent;
