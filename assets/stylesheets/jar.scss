@@ -52,9 +52,14 @@ h1 {
         transform: translateX(70px);
       }
     }
-    .lid {
+    .name {
       fill: transparent;
       stroke: orange;
+      stroke-width: 16;
+    }
+    .lid {
+      fill: transparent;
+      stroke: #777;
       stroke-width: 16;
     }
     circle {
