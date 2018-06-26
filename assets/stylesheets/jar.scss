@@ -133,6 +133,10 @@ ul {
         font-size: 90%;
         margin-right: .5rem;
         padding: 0 11px 2px;
+        &.thrv {
+          background: #F19D38;
+          color: black;
+        }
         &.nrh {
           background: #E06437;
           color: white;
