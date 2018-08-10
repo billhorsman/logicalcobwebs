@@ -28,6 +28,8 @@
       </ul>
 
       <p>I've worked for banks, telecoms, government, education, distribution, retail and news media. Some of it has been at the leading edge using the latest tools; some of it has been the rigor of maintaining a financial system. All of it has taught me a great deal: language skills like Java and Ruby; coding skills like testing and transparency; business skills like communication and commitment.</p>
+
+      <p>I now work for <a href="https://ti.to">Tito</a> as part of their engineering team.</p>
     </section>
   </article>
 </template>
