@@ -133,7 +133,8 @@ ul {
         font-size: 90%;
         margin-right: .5rem;
         padding: 0 11px 2px;
-        &.thrv {
+        &.thrv,
+        &.web {
           background: #F19D38;
           color: black;
         }
@@ -141,7 +142,8 @@ ul {
           background: #E06437;
           color: white;
         }
-        &.ess {
+        &.ess,
+        &.proj {
           background: #AF383A;
           color: white;
         }
