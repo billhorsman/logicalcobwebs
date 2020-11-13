@@ -6,22 +6,22 @@
       <avatar name="Bill" image="bill.png" />
 
       <p class="social">
-        <a href="mailto:bill@logicalcobwebs.com"
+        <a href="mailto:bill@logicalcobwebs.com" title="Email"
           ><i class="fas fa-fw fa-envelope"
         /></a>
-        <a href="http://twitter.com/billhorsman"
+        <a href="http://twitter.com/billhorsman" title="Twitter"
           ><i class="fab fa-fw fa-twitter"
         /></a>
-        <a href="https://www.instagram.com/billhorsman/"
+        <a href="https://www.instagram.com/billhorsman/" title="Instagram"
           ><i class="fab fa-fw fa-instagram"
         /></a>
-        <a href="http://github.com/billhorsman"
+        <a href="http://github.com/billhorsman" title="Github"
           ><i class="fab fa-fw fa-github"
         /></a>
-        <a href="https://medium.com/@billhorsman"
+        <a href="https://medium.com/@billhorsman" title="Medium"
           ><i class="fab fa-fw fa-medium"
         /></a>
-        <a href="https://keybase.io/billhorsman"
+        <a href="https://keybase.io/billhorsman" title="Keybase"
           ><i class="fab fa-fw fa-keybase"
         /></a>
       </p>
@@ -102,11 +102,11 @@
 <script>
 export default {
   head: {
-    title: 'Bill Horsman',
+    title: "Bill Horsman",
   },
-}
+};
 </script>
 
 <style lang="scss">
-@import '@/assets/stylesheets/article.scss';
+@import "@/assets/stylesheets/article.scss";
 </style>
