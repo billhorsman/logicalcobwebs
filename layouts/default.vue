@@ -6,8 +6,8 @@
 
 <style>
 html {
-  @import url('https://fonts.googleapis.com/css?family=Overlock:400,700|Ubuntu+Mono');
-  font-family: 'Overlock', Arial, sans-serif;
+  @import url("https://fonts.googleapis.com/css?family=Overlock:400,700|Ubuntu+Mono");
+  font-family: "Overlock", Arial, sans-serif;
   font-size: 18px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  background: #fff1e5;
-  color: #444;
+  background: #fef9f5;
+  color: #121212;
 }
 </style>

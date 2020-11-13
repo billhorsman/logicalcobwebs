@@ -1,11 +1,11 @@
 a {
-  border-bottom: 1px solid transparent;
-  color: #ee783a;
+  border-bottom: 1px solid #dcdcdc;
+  color: #cb4700;
   display: inline-block;
   margin-bottom: -1px;
   text-decoration: none;
   transition: all 0.1s;
   &:hover {
-    border-color: #ee783a;
+    border-color: #cb4700;
   }
 }
