@@ -1,17 +1,19 @@
 <template>
   <section class="container">
-    <nav>
-      <a href="/bill">
-        <span class="name">Bill Horsman</span>
-        <img src="~/assets/images/bill.jpg" alt="Bill" />
-        <span class="role">Computer Programmer</span>
-      </a>
-      <a href="/nonie">
-        <span class="name">Nonie Coulthard</span>
-        <img src="~/assets/images/nonie.jpg" alt="Bill" />
-        <span class="role">Nature Conservationist</span>
-      </a>
-    </nav>
+    <main>
+      <nav>
+        <a href="/bill">
+          <span class="name">Bill Horsman</span>
+          <img src="~/assets/images/bill.jpg" alt="Bill" />
+          <span class="role">Computer Programmer</span>
+        </a>
+        <a href="/nonie">
+          <span class="name">Nonie Coulthard</span>
+          <img src="~/assets/images/nonie.jpg" alt="Bill" />
+          <span class="role">Nature Conservationist</span>
+        </a>
+      </nav>
+    </main>
   </section>
 </template>
 
