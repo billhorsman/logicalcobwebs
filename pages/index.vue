@@ -9,7 +9,7 @@
         </a>
         <a href="/nonie">
           <span class="name">Nonie Coulthard</span>
-          <img src="~/assets/images/nonie.jpg" alt="Bill" />
+          <img src="~/assets/images/nonie.jpg" alt="Nonie" />
           <span class="role">Nature Conservationist</span>
         </a>
       </nav>
@@ -27,6 +27,7 @@ section {
 }
 nav {
   display: flex;
+  justify-content: between;
 }
 a {
   align-items: center;
@@ -35,7 +36,7 @@ a {
   color: #444;
   display: flex;
   flex-direction: column;
-  padding: 1rem 3rem;
+  padding: 1rem 1rem;
   text-decoration: none;
   transition: all 0.3s;
   span {
@@ -52,6 +53,14 @@ a {
     color: #000;
     img {
       filter: grayscale(30%);
+    }
+  }
+  @media (max-width: 480px) {
+    span.name {
+      font-size: 1rem;
+    }
+    span.role {
+      font-size: 0.9rem;
     }
   }
 }
