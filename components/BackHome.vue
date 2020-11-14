@@ -1,7 +1,9 @@
 <template>
-  <a href="/" class="back-home"
-    ><i class="fas fa-angle-double-left" />Back home</a
-  >
+  <nav>
+    <a href="/" class="back-home"
+      ><i class="fas fa-angle-double-left" />Back home</a
+    >
+  </nav>
 </template>
 
 <style lang="scss">
