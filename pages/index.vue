@@ -3,7 +3,7 @@
     <nav>
       <a href="/bill">
         <span class="name">Bill Horsman</span>
-        <img src="~/assets/images/bill.png" alt="Bill" />
+        <img src="~/assets/images/bill.jpg" alt="Bill" />
         <span class="role">Computer Programmer</span>
       </a>
       <a href="/nonie">

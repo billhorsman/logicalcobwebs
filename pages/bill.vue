@@ -3,7 +3,7 @@
     <section>
       <back-home />
       <h1>Bill Horsman</h1>
-      <avatar name="Bill" image="bill.png" />
+      <avatar name="Bill" image="bill.jpg" />
 
       <p class="social">
         <a href="mailto:bill@logicalcobwebs.com" title="Email"
