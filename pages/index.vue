@@ -73,4 +73,14 @@ img {
     width: 120px;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  a {
+    color: #c9d1d9;
+    &:hover {
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+    }
+  }
+}
 </style>

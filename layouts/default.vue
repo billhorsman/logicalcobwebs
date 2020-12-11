@@ -28,4 +28,11 @@ body {
   background: #fef9f5;
   color: #121212;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0d1117;
+    color: #c9d1d9;
+  }
+}
 </style>

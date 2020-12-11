@@ -61,3 +61,37 @@ li {
     color: #444;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  li {
+    span {
+      color: #c9d1d9;
+    }
+  }
+
+  .social {
+    a {
+      .fa-envelope {
+        color: #fff;
+      }
+      .fa-twitter {
+        color: #4c9fec;
+      }
+      .fa-instagram {
+        color: #ed4a55;
+      }
+      .fa-medium {
+        color: #4ba57f;
+      }
+      .fa-keybase {
+        color: #ee783a;
+      }
+      .fa-github {
+        color: #fff;
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
