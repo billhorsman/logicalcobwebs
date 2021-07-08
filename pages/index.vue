@@ -1,10 +1,17 @@
 <template>
-  <section class="container">
+  <section>
     <main>
       <nav>
         <a href="/bill">
           <span class="name">Bill Horsman</span>
-          <img src="~/assets/images/bill.jpg" alt="Bill" />
+          <div class="hovering-avatar">
+            <img class="avatar" src="~/assets/images/bill.png" alt="Bill" />
+            <img
+              class="avatar-hover"
+              src="~/assets/images/bill-hover.png"
+              alt="Bill"
+            />
+          </div>
           <span class="role">Computer Programmer</span>
         </a>
         <a href="/nonie">
@@ -45,14 +52,14 @@ a {
       font-size: 1.3rem;
     }
   }
-  img {
-    filter: grayscale(100%);
+  .avatar-hover {
+    opacity: 0;
   }
   &:hover {
     background: rgba(255, 255, 255, 0.1);
     color: #000;
-    img {
-      filter: grayscale(30%);
+    .avatar-hover {
+      opacity: 1;
     }
   }
   @media (max-width: 480px) {
@@ -71,6 +78,18 @@ img {
   @media (max-width: 480px) {
     height: 120px;
     width: 120px;
+  }
+}
+
+.hovering-avatar {
+  height: 160px;
+  position: relative;
+  width: 160px;
+  img {
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: all linear 0.2s;
   }
 }
 

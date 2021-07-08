@@ -4,7 +4,7 @@
       <back-home />
       <main>
         <h1>Bill Horsman</h1>
-        <avatar name="Bill" image="bill.jpg" />
+        <avatar name="Bill" image="bill.png" />
 
         <nav class="social">
           <a href="mailto:bill@logicalcobwebs.com" title="Email"
